@@ -27,6 +27,18 @@ dependencies {
     // Use the awesome Spock testing and specification framework
     testImplementation 'org.spockframework:spock-core:1.2-groovy-2.5'
 }
+//configure docToolchain to use the main project's config
+project('docToolchain') {
+    if (project.hasProperty('docDir')) {
+        docDir = '../.'
+        mainConfigFile = 'config/docToolchain.groovy'
+    } else {
+        println "="*80
+        println "  please initialize the docToolchain submodule"
+        println "  by executing git submodule update -i"
+        println "="*80
+    }
+}
 
 // Define the main class for the application
 mainClassName = 'demo.App'
