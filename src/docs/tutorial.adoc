@@ -102,3 +102,19 @@ project('docToolchain') {
     }
 }
 ----
+
+.build.gradle
+[source,groovy]
+----
+dependencies {
+
+    // ...
+
+    testCompile ("com.athaydes:spock-reports:1.6.0") { transitive = false }
+
+    // recommended for logging
+    testCompile 'org.slf4j:slf4j-api:1.7.13'
+    testCompile 'org.slf4j:slf4j-simple:1.7.13'
+
+}
+----
