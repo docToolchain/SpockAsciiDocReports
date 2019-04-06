@@ -12,9 +12,15 @@
     div.PASS pre {
         background-color: #EFE !important;
     }
+    a.PASS {
+        color: #080;
+    }
     div.FAIL {
         background-color: #FDD;
         border: 2px solid red;
+    }
+    a.FAIL {
+        color: #A00;
     }
     div.FAIL pre {
         background-color: #FEE !important;
@@ -24,7 +30,31 @@
         border: none;
         color: #AAA;
     }
+    a.IGNORED {
+        color: #AAA;
+    }
 </style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var tocLabels = document.querySelectorAll('#toc a');
+
+        tocLabels.forEach(label => {
+            if (label.text.includes("IGNORED:")) {
+                label.classList.add('IGNORED');
+            }
+            ;
+            if (label.text.includes("FAIL:")) {
+                label.classList.add('FAIL');
+            }
+            ;
+            if (label.text.includes("PASS:")) {
+                label.classList.add('PASS');
+            }
+            ;
+        });
+    });
+</script>
+
 ++++
 
 // numbering from here on
