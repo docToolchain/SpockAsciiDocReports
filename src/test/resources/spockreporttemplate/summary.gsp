@@ -73,17 +73,17 @@
 .summary
 [options="header"]
 |==================================================================================================================================
-| Total          | Passed          | Failed          | Feature failures | Feature errors   | Success rate        | Total time (ms)
-| ${stats.total} | ${stats.passed} | ${stats.failed} | ${stats.fFails}  | ${stats.fErrors} | ${stats.successRate}| ${stats.time}
+| Total          | Passed          | Failed          | Feature failures | Feature errors   | Success rate         | Total time (ms)
+| ${stats.total} | ${stats.passed} | ${stats.failed} | ${stats.fFails}  | ${stats.fErrors} | ${stats.successRate}%| ${stats.time}
 |==================================================================================================================================
 
 === Specifications
 
 [options="header"]
 |===================================================================
-|Name  | Features | Failed | Errors | Skipped | Success rate | Time
+| Name  | Features | Failed | Errors | Skipped | Success rate | Time
 <% data.each { name, map ->
-    %>| $name | ${map.totalRuns} | ${map.failures} | ${map.errors} | ${map.skipped} | ${map.successRate} | ${map.time} | ${map.dump()}
+    %>| $name | ${map.stats.totalRuns} | ${map.stats.failures} | ${map.stats.errors} | ${map.stats.skipped} | ${map.stats.successRate}% | ${map.stats.time}
 <% } %>
 |===================================================================
 
