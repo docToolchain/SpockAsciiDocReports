@@ -1,0 +1,22 @@
+== Spock AscciiDoc Reports
+
+This is currently still an exprimental repo.
+It is supposed to be turned into a talk soon.
+
+Wanna give it a try?
+
+Run some tests via
+
+    ./gradlew clean test
+
+... yes, there are failing tests to demonstrate the output.
+
+Now render the result as HTML via
+
+    ./gradlew generateHTML
+
+the result can be found in `build/docs/html5/spock-reports.html`
+
+Happy Coding!
+
+Ralf

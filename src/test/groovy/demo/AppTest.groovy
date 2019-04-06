@@ -3,17 +3,53 @@
  */
 package demo
 
+import spock.lang.Ignore
 import spock.lang.Specification
+import spock.lang.Unroll
 
 class AppTest extends Specification {
     def "application has a greeting"() {
-        setup:
-        def app = new App()
+        setup: "create new App"
+            def app = new App()
 
-        when:
-        def result = app.greeting
+        when: "when we invoke greeting"
+            def result = app.greeting
 
-        then:
-        result != null
+        then: "we get a non-null result"
+            result != null
+    }
+    def "greeting contains 'hello'"() {
+        setup: "create new App"
+            def app = new App()
+
+        when: "when we invoke greeting"
+            def result = app.greeting
+
+        then: "the result contains 'hello'"
+            result.toLowerCase().contains('hello')
+            result == "hallo welt"
+            result.toLowerCase().contains('world')
+    }
+    @Unroll()
+    def "data driven #test"() {
+
+        expect: "just some code"
+            3.times { i ->
+                def a = test
+            }
+        where: "input data"
+            test    || result
+            "hello" || 1
+            "world" || 2
+    }
+    @Ignore()
+    def "not implemented yet"() {
+        expect: "implement this"
+            println "nothing"
+            reportInfo "Some information I want to show in the report"
+    }
+
+    def setupSpec() {
+        reportHeader "something"
     }
 }

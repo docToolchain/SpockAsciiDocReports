@@ -7,6 +7,7 @@ inputPath = 'src/docs'
 
 inputFiles = [
               [file: 'tutorial.adoc',            formats: ['html','pdf']],
+              [file: 'spock-reports.adoc',       formats: ['html','pdf']],
              ]
 
 taskInputsDirs = ["${inputPath}/images"]

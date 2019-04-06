@@ -1,0 +1,11 @@
+//just a stub for the generated reports
+:doctype: book
+:icons: font
+:sectanchors:
+:toc: left
+
+include::../../build/spock-reports/summary.adoc[]
+
+
+
+
