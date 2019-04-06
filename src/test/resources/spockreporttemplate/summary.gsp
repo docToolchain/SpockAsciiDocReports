@@ -9,6 +9,12 @@
     div.PASS {
         background-color: #DFD;
     }
+    div.collapsed {
+        height: 0px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        overflow: hidden;
+    }
     div.PASS pre {
         background-color: #EFE !important;
     }
@@ -36,6 +42,7 @@
 </style>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        // re-style TOC
         var tocLabels = document.querySelectorAll('#toc a');
 
         tocLabels.forEach(label => {
@@ -52,6 +59,14 @@
             }
             ;
         });
+
+        // collapse passed tests
+        var passedTests = document.querySelectorAll('div.PASS');
+        passedTests.forEach(test => {
+            test.classList.add('collapsed');
+            test.addEventListener("click", function(){ this.classList.toggle('collapsed'); }, false);
+        })
+
     });
 </script>
 
