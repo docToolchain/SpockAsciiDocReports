@@ -1,5 +1,7 @@
 <%
     def fmt = new com.athaydes.spockframework.report.internal.StringFormatHelper()
+    def file = data.info.pkg.replaceAll("[.]","/")+"/"+data.info.filename
+    def classname = data.info.pkg+"."+data.info.filename
     def stats = com.athaydes.spockframework.report.util.Utils.stats( data )
 %>== Report for ${data.info.description.className}
 
@@ -10,6 +12,8 @@
 |Total Runs        |Success Rate 													 |Total time												|Failures					 |Errors					|Skipped
 |${stats.totalRuns}|${fmt.toPercentage(stats.successRate)} |${fmt.toTimeDuration(stats.time)} |${stats.failures} |${stats.errors} |${stats.skipped}
 |====
+
+{gitwebpath}${file}[${file}]
 
 === Features
 <%

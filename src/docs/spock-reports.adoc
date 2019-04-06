@@ -4,6 +4,8 @@
 :sectanchors:
 :toc: left
 
+:gitwebpath: https://github.com/docToolchain/SpockAsciiDocReports/tree/master/src/test/groovy/
+
 include::../../build/spock-reports/summary.adoc[]
 
 
