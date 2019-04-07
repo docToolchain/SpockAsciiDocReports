@@ -46,5 +46,11 @@ project('docToolchain') {
     }
 }
 
+test {
+    // let's you start gradle with an option:
+    // gradle -Dtest.ignoreFailures=true test
+    ignoreFailures Boolean.getBoolean("test.ignoreFailures")
+}
+
 // Define the main class for the application
 mainClassName = 'demo.App'
