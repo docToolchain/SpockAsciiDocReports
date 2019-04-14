@@ -12,6 +12,9 @@ plugins {
 
     // Apply the application plugin to add support for building an application
     id 'application'
+
+    // webdriver binaries
+    id "com.github.erdi.webdriver-binaries" version "2.1"
 }
 
 repositories {
@@ -32,6 +35,11 @@ dependencies {
     testCompile 'org.slf4j:slf4j-api:1.7.13'
     testCompile 'org.slf4j:slf4j-simple:1.7.13'
 
+    // for Geb
+    compile "org.gebish:geb-spock:2.3.1"
+    // compile "org.seleniumhq.selenium:selenium-chrome-driver:3.14.0"
+    compile "org.seleniumhq.selenium:selenium-firefox-driver:3.14.0"
+    compile "org.seleniumhq.selenium:selenium-support:3.14.0"
 }
 //configure docToolchain to use the main project's config
 project('docToolchain') {
@@ -44,6 +52,18 @@ project('docToolchain') {
         println "  by executing git submodule update -i"
         println "="*80
     }
+}
+
+// https://github.com/erdi/webdriver-binaries-gradle-plugin
+webdriverBinaries {
+
+    chromedriver {
+        driverUrlsConfiguration = resources.text.fromFile('src/test/resources/webdriverUrls.json')
+        version = '73.0.3683.68'
+    }
+
+    geckodriver '0.24.0'
+    //iedriverserver '3.8.0'
 }
 
 test {
