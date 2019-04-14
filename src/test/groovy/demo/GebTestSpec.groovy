@@ -4,26 +4,54 @@
 package demo
 
 import spock.lang.Ignore
+import spock.lang.Issue
+import spock.lang.Narrative
+import spock.lang.See
 import spock.lang.Specification
 import spock.lang.Unroll
 import geb.Page
 import geb.spock.GebSpec
+import geb.spock.GebReportingSpec
 
 class GoogleHomePage extends Page {
     static url = "http://www.google.com"
 }
 
-class GebTestSpec extends GebSpec {
+@Narrative("""
+this is a long explanation why +
+spans several lines and can use **AsciiDoc**
+""")
+class GebTestSpec extends GebReportingSpec {
 
+    def setupSpec() {
+        browser.report("report from setup spec")
+    }
+
+    @Issue("test-issue-4711")
+    def "simple screenshot test"() {
+        when:
+            drive {
+                go "http://gebish.org"
+            }
+
+            report "Geb start page"
+
+        then:
+            title.contains("Browser Automation")
+    }
+
+    @See("somewhere else")
     def "go method does NOT set the page"() {
         given:
             Page oldPage = page
 
         when:
             go "http://www.google.com"
+            at GoogleHomePage
             report "Google Main page"
         then:
             oldPage == page
+            report "another report"
             currentUrl.contains "google"
     }
 }

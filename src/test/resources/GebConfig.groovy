@@ -1,1 +1,4 @@
-reportsDir = new File("build/geb-reports")
+import com.aoe.gebspockreports.GebReportingListener
+
+reportingListener = new GebReportingListener()
+reportsDir = "build/spock-reports"
