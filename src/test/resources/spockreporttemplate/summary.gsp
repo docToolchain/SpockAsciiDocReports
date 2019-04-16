@@ -15,20 +15,23 @@
         padding-bottom: 4px;
         overflow: hidden;
     }
+    div.collapsed:before {
+        content: 'test';
+    }
     div.PASS pre {
         background-color: #EFE !important;
     }
     a.PASS {
         color: #080;
     }
-    div.FAIL {
+    div.FAIL, div.ERROR, div.FAILURE {
         background-color: #FDD;
         border: 2px solid red;
     }
-    a.FAIL {
+    a.FAIL, a.ERROR, a.FAILURE {
         color: #A00;
     }
-    div.FAIL pre {
+    div.FAIL pre, div.ERROR pre, div.FAILURE pre {
         background-color: #FEE !important;
     }
     div.IGNORED {
@@ -39,6 +42,35 @@
     a.IGNORED {
         color: #AAA;
     }
+    div.PASS p, div.FAIL p, div.IGNORED p, div.ERROR p, div.FAILURE p {
+        margin: 0;
+    }
+    div.PASS p, div.FAIL p, div.IGNORED p, div.ERROR p, div.FAILURE p {
+        margin: 0;
+    }
+    div.PASS, div.FAIL, div.IGNORED, div.ERROR, div.FAILURE {
+        padding: 3px 5px;
+    }
+    div.PASS pre, div.FAIL pre, div.IGNORED pre, div.ERROR pre, div.FAILURE pre {
+        padding: 3px 5px !important;
+        margin: 0 0 0 15px !important;
+    }
+    div.PASS div.listingblock, div.FAIL div.listingblock, div.IGNORED div.listingblock div.ERROR div.listingblock div.FAILURE div.listingblock {
+        margin: 0;
+    }
+    div.PASS div.imageblock, div.FAIL div.imageblock, div.IGNORED div.imageblock, div.ERROR div.imageblock, div.FAILURE div.imageblock {
+        margin: 0;
+    }
+    div.PASS table, div.FAIL table, div.IGNORED table, div.ERROR table, div.FAILURE table {
+        margin: 0 !important;
+    }
+    div.PASS td, div.FAIL td, div.IGNORED td, div.ERROR td, div.FAILURE td {
+        padding: 2px 6px;
+    }
+    div.PASS th, div.FAIL th, div.IGNORED th, div.ERROR th, div.FAILURE th {
+        padding: 2px 6px;
+    }
+
 </style>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -48,16 +80,19 @@
         tocLabels.forEach(label => {
             if (label.text.includes("IGNORED:")) {
                 label.classList.add('IGNORED');
-            }
-            ;
+            };
             if (label.text.includes("FAIL:")) {
                 label.classList.add('FAIL');
-            }
-            ;
+            };
+            if (label.text.includes("FAILURE:")) {
+                label.classList.add('FAIL');
+            };
+            if (label.text.includes("ERROR:")) {
+                label.classList.add('FAIL');
+            };
             if (label.text.includes("PASS:")) {
                 label.classList.add('PASS');
-            }
-            ;
+            };
         });
 
         // collapse passed tests
