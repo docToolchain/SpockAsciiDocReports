@@ -43,7 +43,7 @@ dependencies {
 
     // for Geb-Spock-Reports
     // https://github.com/AOEpeople/geb-spock-reports
-    testCompile 'com.aoe:geb-spock-reports:0.2.2'
+    testCompile 'com.aoe:geb-spock-reports:0.2.3'
 }
 //configure docToolchain to use the main project's config
 project('docToolchain') {
