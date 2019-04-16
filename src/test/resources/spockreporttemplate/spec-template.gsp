@@ -3,10 +3,18 @@
     def file = data.info.pkg.replaceAll("[.]","/")+"/"+data.info.filename
     def classname = data.info.pkg+"."+data.info.filename
     def stats = com.athaydes.spockframework.report.util.Utils.stats( data )
-	def gebUtils = new com.aoe.gebspockreports.GebReportUtils()
-	def gebReport = gebUtils.readGebReport()
-	def specReport = gebReport.findSpecByLabel(utils.getSpecClassName(data))
+    def gebUtils, gebReport, specReport
+    try {
+        def c = Class.forName("com.aoe.gebspockreports.GebReportUtils")
+        if(c) {
+            gebUtils = c.newInstance()
 
+            gebReport = gebUtils.readGebReport()
+            specReport = gebReport.findSpecByLabel(utils.getSpecClassName(data))
+        }
+    } catch (Exception e) {
+        //it seems that GebSpockReports is not installed
+    }
 %>== Report for ${data.info.description.className}
 
 <%
@@ -101,7 +109,7 @@ ${block.sourceCode.join('\n')}
 
 <% if (gebArtifacts) { %>
 
-.Geb Artifacts:
+.Screenshots:
 [cols="a,a,a,a"]
 |====
 
@@ -119,7 +127,7 @@ image::${imageFile.replaceAll(" ","%20").replaceAll('\\\\','/')}[screenshot $lab
         }
 //fill remaining cells
 (gebArtifacts.size()%4).times {
-    out << "| \r\n"
+     out << "| \r\n"
 }
 %>
 |====
@@ -131,3 +139,47 @@ image::${imageFile.replaceAll(" ","%20").replaceAll('\\\\','/')}[screenshot $lab
  <%
     }
  %>
+
+<%
+    def unassignedArtifacts = specReport?.getUnassignedGebArtifacts()
+    if (unassignedArtifacts) {
+%>
+
+== Unassigned Geb Artifacts
+
+The following artifacts could not be mapped to a feature.
+
+++++
+
+<div class="geb-artifacts">
+    juhu!
+    <table>
+        <thead>
+        <tr>
+            <th>Label</th>
+            <th>Image</th>
+            <th>Html</th>
+            <th>Page object</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% unassignedArtifacts.forEach { artifact ->
+            def label = artifact.label
+            def imageFile = "./" + artifact.files.find { it.endsWith('png') }
+            def domSnapshotFile = "./" + artifact.files.find { it.endsWith('html') }
+        %>
+        <tr>
+            <td>$label</td>
+            <td><a href="$imageFile">png</a></td>
+            <td><a href="$domSnapshotFile">html</a></td>
+            <td>${artifact.pageObject}</td>
+        </tr>
+        <%
+                } %>
+        </tbody>
+    </table>
+</div>
+
+++++
+
+<% } %>
