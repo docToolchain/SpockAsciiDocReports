@@ -9,14 +9,33 @@
     div.PASS {
         background-color: #DFD;
     }
-    div.collapsed {
-        height: 0px;
-        padding-top: 4px;
-        padding-bottom: 4px;
+    div.PASS {
+        transition: max-height 300ms ease-out;
+        max-height: 800px;
         overflow: hidden;
     }
-    div.collapsed:before {
-        content: 'test';
+    div.collapsed {
+        max-height: 24px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    div.PASS.collapsed:before {
+        content: '🔽 show passed test';
+        width: 100%;
+        text-align: center;
+        display: block;
+        font-family: Tahoma, arial, sans-serif;
+        font-size: small;
+    }
+    div.PASS:before {
+        content: '🔼 hide passed test';
+        width: 100%;
+        text-align: center;
+        display: block;
+        font-family: Tahoma, arial, sans-serif;
+        font-size: small;
     }
     div.PASS pre {
         background-color: #EFE !important;
