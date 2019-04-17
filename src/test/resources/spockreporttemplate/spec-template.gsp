@@ -4,6 +4,7 @@
     def classname = data.info.pkg+"."+data.info.filename
     def stats = com.athaydes.spockframework.report.util.Utils.stats( data )
     def gebUtils, gebReport, specReport
+    def assignedArtifacts = []
     try {
         def c = Class.forName("com.aoe.gebspockreports.GebReportUtils")
         if(c) {
@@ -105,15 +106,17 @@ ${block.sourceCode.join('\n')}
             }
             out << "====\n"
         }
- %>
+ %>2
 
 <% if (gebArtifacts) { %>
+ +
 
 .Screenshots:
 [cols="a,a,a,a"]
 |====
 
 <% gebArtifacts.sort { it.number }.eachWithIndex { artifact, i ->
+        assignedArtifacts << artifact
         def label = artifact.label?.replaceFirst(name+"-", '')
         def trCssClass = label.endsWith('-failure') ? 'geb-failure' : ''
         def imageFile = "./" + artifact.files.find { it.endsWith('png') }
@@ -143,43 +146,31 @@ image::${imageFile.replaceAll(" ","%20").replaceAll('\\\\','/')}[screenshot $lab
 <%
     def unassignedArtifacts = specReport?.getUnassignedGebArtifacts()
     if (unassignedArtifacts) {
+        unassignedArtifacts -= assignedArtifacts
+    }
+    if (unassignedArtifacts) {
 %>
 
-== Unassigned Geb Artifacts
+== Unassigned Screenshots
 
-The following artifacts could not be mapped to a feature.
+The following Screenshots could not be mapped to a feature.
 
-++++
+[role="unassignedArtifacts"]
+****
 
-<div class="geb-artifacts">
-    juhu!
-    <table>
-        <thead>
-        <tr>
-            <th>Label</th>
-            <th>Image</th>
-            <th>Html</th>
-            <th>Page object</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% unassignedArtifacts.forEach { artifact ->
-            def label = artifact.label
-            def imageFile = "./" + artifact.files.find { it.endsWith('png') }
-            def domSnapshotFile = "./" + artifact.files.find { it.endsWith('html') }
-        %>
-        <tr>
-            <td>$label</td>
-            <td><a href="$imageFile">png</a></td>
-            <td><a href="$domSnapshotFile">html</a></td>
-            <td>${artifact.pageObject}</td>
-        </tr>
+|===
+| Label | Image | Html| Page object
+    <% unassignedArtifacts.forEach { artifact ->
+        def label = artifact.label
+        def imageFile = "./" + artifact.files.find { it.endsWith('png') }
+        def domSnapshotFile = "./" + artifact.files.find { it.endsWith('html') }
+    %>
+| $label| $imageFile | ${artifact.pageObject}
+
         <%
                 } %>
-        </tbody>
-    </table>
-</div>
+|===
 
-++++
+****
 
 <% } %>
