@@ -1,0 +1,130 @@
+= AsciiDoc
+
+*AsciiDoc* ist ein Dokumentationsformat, welches mit Hilfe des Tools *AsciiDoctor* in verschiedene andere Formate wie z.B. HTML gewandelt werden kann.
+
+AsciiDoc hat den Vorteil, dass man es einfach wie eine eMail schreiben kann und sich wie Sourceode versionieren lässt.
+
+Sie auch https://asciidoctor.org[asciidoctor.org]
+
+[source,groovy]
+----
+
+----
+
+:revealjs_margin: 0.0
+
+[subs="attributes"]
+++++
+<!-- http://blog.schauderhaft.de/asciidoctor-talk/talk.html#/slide-footer -->
+<script type="text/javascript">
+    window.addEventListener("load", function() {
+        revealDiv = document.querySelector("body div.reveal")
+        footer = document.getElementById("schauderhaft-footer");
+        revealDiv.appendChild(footer);
+
+    } );
+</script>
+<style>
+.reveal img, .reveal video, .reveal iframe {
+	max-width: 95%;
+	max-height: 95%;
+}
+section[data-background-size] h2 {
+	background: rgba(156, 217, 117, 0.5);
+	box-shadow: 0 0 5px rgba(181, 170, 162, 0.5);
+	text-shadow: none;
+}
+
+section[data-background-size] img {
+	display: none;
+}
+
+section[data-background-size] {
+	top: initial !important;
+}
+
+.line-through {
+	text-decoration: line-through;
+}
+
+.reveal strong {
+	font-family: "Amatic SC";
+	font-size: 120%;
+}
+
+.footer {
+	position: absolute;
+	display: table;
+	width: 100%;
+	bottom: 0;
+	color: #79706A;
+}
+
+.footer span {
+	display: table-cell;
+	padding: 0px 15px 5px;
+	text-align: center;
+	font-family: "Roboto Mono", monospace;
+	font-size: 70%;
+}
+
+.footer span:nth-of-type(1) {
+	text-align: left;
+}
+
+.footer span:nth-last-child(1) {
+	text-align: right;
+}
+
+section[data-background-size] .footer span {
+	display: none;
+}
+</style>
+<div id="footer" class="footer">
+    <span class="element">{twitter-tag}</span>
+    <span class="element">{conference-tag}</span>
+    <span class="element">{talk-tag}</span>
+</div>
+++++
+
+
+include::customKeymap.adoc[]
+
+include::slides.pptx.ad[tags=title]
+
+Ein perfektes Team
+
+== BDD mit Spock
+
+include::slides.pptx.ad[tags=aboutme]
+
+.test
+
+== test
+
+image::diagram-classes.png[background, size=contain]
+
+[plantuml, diagram-classes, png]
+----
+class BlockProcessor
+class WhatEver
+----
+
+== last try
+
+image::ppt/slides.pptx/Slide6.jpg[background, size=contain]
+
+[%notitle]
+== last try II
+
+image::ppt/slides.pptx/Slide6.jpg[role=background, size=contain]
+
+[%notitle]
+== last try III
+
+image::ppt/slides.pptx/Slide6.jpg[role=canvas, size=contain]
+
+:twitter-tag: @RalfDMueller
+:conference-tag: Write the Docs
+:talk-tag: Ralf D. Müller
+
