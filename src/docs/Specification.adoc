@@ -1,0 +1,16 @@
+= Spezifikation
+
+include::config.adoc[]
+:pathToSpec: ../../build/spock-reports/
+:numbered:
+
+Dieses Projekt soll den Benutzer durch zusätzliche Features länger auf der Suchseite halten um höhere Werbeinnahmen zu generieren.
+
+== Story: Taschenrechner
+
+Als Benutzer möchte ich bei Eingabe des Suchbegriffs "Rechner" oder bei der Eingabe einer Mathematischen Rechnung einen Taschenrechner als Web-Anwendung angezeigt bekommen, so daß ich nicht die Suche Verlassen muss
+
+=== Akzeptanztest
+
+include::{pathToSpec}demo.WebCalcSpec.adoc[tag=Bing-Rechner_aufrufen]
+

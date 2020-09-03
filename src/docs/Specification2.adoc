@@ -1,0 +1,39 @@
+= Spezifikation
+
+include::config.adoc[]
+
+Dieses Projekt soll den Benutzer durch zusätzliche Features länger auf der Suchseite halten um höhere Werbeinnahmen zu generieren.
+
+== Story: Taschenrechner
+
+Als Benutzer möchte ich bei Eingabe des Suchbegriffs "Rechner" oder bei der Eingabe einer Mathematischen Rechnung einen Taschenrechner als Web-Anwendung angezeigt bekommen,
+so daß ich nicht die Suche Verlassen muss
+
+=== Acceptancetests
+
+==== User calls Calculator
+
+[cols="1,10"]
+|===
+| Given | User is on the main page
+| When  | User enters 'calc' as search-term and submits the form
+| Then  | the search result displays a calculator
+|===
+
+
+==== User does a calculation
+
+[cols="1,10"]
+|===
+| Given | User is on the main page
+| When  | User enters a `calculation` as search-term and submits the form
+| Then  | the search result displays the `result` within the calculator
+|===
+
+.valid inputs
+|===
+| calculation | result
+| '3+4'       | 7
+| '6*7'       | 42
+|===
+

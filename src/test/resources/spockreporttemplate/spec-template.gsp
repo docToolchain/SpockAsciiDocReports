@@ -23,6 +23,8 @@ def narrative = (data.info.narrative ?: '')
 %>
 ${narrative}
 
+:imagesdir: ./
+
 === Summary
 [options="header",cols="asciidoc,asciidoc"]
 |====
@@ -43,6 +45,7 @@ ${narrative}
         def gebArtifacts = gebFeatureReport?.artifacts
 %>
 
+// tag::${name.replaceAll("[^-a-zA-Z0-9äöüÖÄÜß]","_")}[]
 ==== $result: $name
 
 <%
@@ -106,10 +109,10 @@ ${block.sourceCode.join('\n')}
             }
             out << "====\n"
         }
- %>2
+ %>
 
 <% if (gebArtifacts) { %>
- +
+
 
 .Screenshots:
 [cols="a,a,a,a"]
@@ -137,6 +140,8 @@ image::${imageFile.replaceAll(" ","%20").replaceAll('\\\\','/')}[screenshot $lab
 <% } //if (gebArtifacts)%>
 
 ****
+
+// end::${name.replaceAll("[^-a-zA-Z0-9äöüÖÄÜß]","_")}[]
 
 //next feature
  <%

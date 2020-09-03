@@ -14,7 +14,41 @@ plugins {
     id 'application'
 
     // webdriver binaries
-    id "com.github.erdi.webdriver-binaries" version "2.1"
+    id "com.github.erdi.webdriver-binaries" version "2.2"
+    id "com.github.ben-manes.versions" version "0.29.0"
+
+}
+
+ext {
+    // The drivers we want to use
+    drivers = ["chrome"]
+
+    ext {
+        chromeDriverVersion = '85.0.4183.38'
+    }
+}
+
+webdriverBinaries {
+    chromedriver {
+        version = chromeDriverVersion
+        fallbackTo32Bit = true
+    }
+}
+
+drivers.each { driver ->
+    task "${driver}Test"(type: Test) {
+        group JavaBasePlugin.VERIFICATION_GROUP
+
+        outputs.upToDateWhen { false }  // Always run tests
+
+        //systemProperty "geb.build.reportsDir", reporting.file("geb/$name")
+        systemProperty "geb.env", driver
+    }
+}
+
+test {
+    dependsOn drivers.collect { tasks["${it}Test"] }
+    enabled = false
 }
 
 repositories {
@@ -25,27 +59,28 @@ repositories {
 
 dependencies {
     // Use the latest Groovy version for building this library
-    implementation 'org.codehaus.groovy:groovy-all:2.5.6'
+    implementation 'org.codehaus.groovy:groovy-all:2.5.13'
 
     // Use the awesome Spock testing and specification framework
-    testCompile 'org.spockframework:spock-core:1.2-groovy-2.5'
-    testCompile ("com.athaydes:spock-reports:1.6.0") { transitive = false }
+    testCompile 'org.spockframework:spock-core:1.3-groovy-2.5'
+    testCompile ("com.athaydes:spock-reports:1.7.1") { transitive = false }
 
     // recommended for logging
-    testCompile 'org.slf4j:slf4j-api:1.7.13'
-    testCompile 'org.slf4j:slf4j-simple:1.7.13'
+    testCompile 'org.slf4j:slf4j-api:1.7.30'
+    testCompile 'org.slf4j:slf4j-simple:1.7.30'
 
     // for Geb
-    compile "org.gebish:geb-spock:2.3.1"
-    // compile "org.seleniumhq.selenium:selenium-chrome-driver:3.14.0"
-    compile "org.seleniumhq.selenium:selenium-firefox-driver:3.14.0"
+    compile "org.gebish:geb-spock:3.4"
+    compile "org.seleniumhq.selenium:selenium-chrome-driver:3.14.0"
+    //compile "org.seleniumhq.selenium:selenium-firefox-driver:3.14.0"
     compile "org.seleniumhq.selenium:selenium-support:3.14.0"
 
     // for Geb-Spock-Reports
     // https://github.com/AOEpeople/geb-spock-reports
-    testCompile 'com.aoe:geb-spock-reports:0.2.3'
+    testCompile 'com.aoe:geb-spock-reports:0.2.6'
 }
 //configure docToolchain to use the main project's config
+
 project('docToolchain') {
     if (project.hasProperty('docDir')) {
         docDir = '../.'
@@ -58,17 +93,6 @@ project('docToolchain') {
     }
 }
 
-// https://github.com/erdi/webdriver-binaries-gradle-plugin
-webdriverBinaries {
-
-    chromedriver {
-        driverUrlsConfiguration = resources.text.fromFile('src/test/resources/webdriverUrls.json')
-        version = '73.0.3683.68'
-    }
-
-    geckodriver '0.24.0'
-    //iedriverserver '3.8.0'
-}
 
 test {
     // let's you start gradle with an option:

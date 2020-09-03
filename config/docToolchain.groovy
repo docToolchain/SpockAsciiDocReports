@@ -6,8 +6,11 @@ outputPath = 'build/docs'
 inputPath = 'src/docs'
 
 inputFiles = [
-              [file: 'tutorial.adoc',            formats: ['html','pdf']],
-              [file: 'spock-reports.adoc',       formats: ['html','pdf']],
+              [file: 'tutorial.adoc',            formats: ['html', 'pdf']],
+              [file: 'spock-reports.adoc',       formats: ['html', 'pdf']],
+              [file: 'artikel.adoc',             formats: ['html', 'pdf']],
+              [file: 'Specification.adoc',       formats: ['html', 'pdf']],
+              [file: 'ppt/talk.adoc',            formats: ['html', 'revealjs']]
              ]
 
 taskInputsDirs = ["${inputPath}/images"]

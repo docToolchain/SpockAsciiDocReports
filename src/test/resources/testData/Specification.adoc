@@ -1,0 +1,52 @@
+== A Specification
+
+.Spec: Login
+****
+This is the narrative. Let's see where this will lead to.
+Can I use **bold**?
+
+.Successful login
+====
+
+Given:: User is on the login page
+
+When:: User enters his credentials and clicks 'login'-button
+
+Then:: The Overview-Screen appears
+
+.where
+|===
+| a | b | output
+| 1 | 2 | 3
+|===
+
+====
+
+
+****
+
+.Spec: Login
+****
+
+.Unsuccessful login
+====
+
+[cols="1,10"]
+|===
+| Given | User is on the login page
+
+| When  | User enters his credentials and clicks 'login'-button
+
+| Then | The Overview-Screen appears
+|===
+
+.where
+|===
+| a | b | output
+
+|===
+
+====
+
+
+****
