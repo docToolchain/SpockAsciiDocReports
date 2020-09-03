@@ -27,7 +27,7 @@ class BingSearchResultPage extends Page {
     static url = "https://www.bing.com/search"
 
     static at = {
-        title ==~ /.*Bing.*/
+        title ==~ /.*calc.*Bing.*/
     }
 }
 @Narrative("""

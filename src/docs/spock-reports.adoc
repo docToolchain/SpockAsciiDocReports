@@ -6,8 +6,9 @@
 
 :gitwebpath: https://github.com/docToolchain/SpockAsciiDocReports/tree/master/src/test/groovy/
 
-include::../../build/spock-reports/summary.adoc[]
+:imagesdir: ../../build/spock-reports/
 
+include::../../build/spock-reports/summary.adoc[]
 
 
 

@@ -23,8 +23,6 @@ def narrative = (data.info.narrative ?: '')
 %>
 ${narrative}
 
-:imagesdir: ./
-
 === Summary
 [options="header",cols="asciidoc,asciidoc"]
 |====

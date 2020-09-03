@@ -2,6 +2,8 @@
 
 include::config.adoc[]
 
+:imagesdir: ../../build/spock-reports/
+
 Dieses Projekt soll den Benutzer durch zusätzliche Features länger auf der Suchseite halten um höhere Werbeinnahmen zu generieren.
 
 == Story: Taschenrechner
